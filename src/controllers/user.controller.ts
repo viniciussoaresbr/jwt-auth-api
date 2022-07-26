@@ -8,9 +8,11 @@ const save = async (req: IRequest, res: Response) => {
     await userService.save(req.body);
     res.status(201).send({ message: "Usuário criado com sucesso" });
   } catch (error) {
-    res
-      .status(httpErrorsStatus.BadRequestError)
-      .send({ message: "Data inválida" });
+    if (error instanceof Error) {
+      const statusCode =
+        httpErrorsStatus[error.name as keyof typeof httpErrorsStatus];
+      res.status(statusCode || 500).send({ message: error.message });
+    }
   }
 };
 

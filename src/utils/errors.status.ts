@@ -3,4 +3,5 @@ export const httpErrorsStatus = {
   UnauthorizedError: 401,
   BadRequestError: 400,
   ForbiddenError: 403,
+  ConflictError: 409,
 };

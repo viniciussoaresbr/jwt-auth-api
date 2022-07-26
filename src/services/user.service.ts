@@ -1,9 +1,19 @@
 import { prisma } from "../../prisma/prisma";
-import { IPost, IUser } from "../interfaces";
+import { IUser } from "../interfaces";
+import createError from "http-errors";
 import bcrypt from "bcryptjs";
 
 const save = async (userBody: IUser) => {
-  const userPassword = bcrypt.hashSync(userBody.password, 8);
+  const { email, password } = userBody;
+  const userExists = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (userExists) throw new createError.Conflict("E-mail já cadastrado");
+
+  const userPassword = bcrypt.hashSync(password, 8);
 
   const user = await prisma.user.create({
     data: { ...userBody, password: userPassword },
