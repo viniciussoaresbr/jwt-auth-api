@@ -14,4 +14,26 @@ const save = async (req: IRequest, res: Response) => {
   }
 };
 
-export const postController = { save };
+const findAll = async (req: IRequest, res: Response) => {
+  try {
+    const data = await postService.findAll();
+    res.status(200).send(data);
+  } catch (error) {
+    res
+      .status(httpErrorsStatus.BadRequestError)
+      .send({ message: "Não foi possível exibir os posts" });
+  }
+};
+
+const findByUserId = async (req: IRequest, res: Response) => {
+  try {
+    const data = await postService.findByUserId(parseInt(req.params.userId));
+    res.status(200).send(data);
+  } catch (error) {
+    res
+      .status(httpErrorsStatus.BadRequestError)
+      .send({ message: "Não foi possível exibir os posts" });
+  }
+};
+
+export const postController = { save, findAll, findByUserId };

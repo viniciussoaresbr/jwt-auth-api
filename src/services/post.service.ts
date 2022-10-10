@@ -16,4 +16,18 @@ const save = async (postBody: IPost, user: IUserRequest) => {
   return post;
 };
 
-export const postService = { save };
+const findAll = () => {
+  return prisma.post.findMany();
+};
+
+const findByUserId = (id: number) => {
+  return prisma.post.findMany({
+    where: {
+      author: {
+        id: id,
+      },
+    },
+  });
+};
+
+export const postService = { save, findAll, findByUserId };
