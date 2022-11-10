@@ -13,12 +13,13 @@ export interface IUserLogin {
 
 export interface IUser extends IUserLogin {
   name: string;
-  lastName: string;
+  lastname: string;
   posts?: IPost[];
 }
 
 export interface IUserRequest {
   userId: number;
+  username: string;
 }
 
 export interface IRequest extends Request {
