@@ -4,6 +4,7 @@ import { IPost, IUserRequest } from "../interfaces";
 const save = async (postBody: IPost, user: IUserRequest) => {
   const post = await prisma.post.create({
     data: {
+      username: user?.username,
       text: postBody.text,
       author: {
         connect: {
