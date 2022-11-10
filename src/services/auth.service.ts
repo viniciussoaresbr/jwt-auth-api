@@ -17,10 +17,10 @@ const auth = async (userLogin: IUserLogin) => {
   }
 
   const checkPassword = bcrypt.compareSync(password, user.password);
-  if (!checkPassword) throw new createError.Unauthorized("Senha não é válida");
+  if (!checkPassword) throw new createError.Unauthorized("Senha inválida");
 
   const accessToken = jwt.sign(
-    { userId: user.id },
+    { userId: user.id, username: user.name },
     process.env.ACESS_TOKEN_SECRET as jwt.Secret
   );
 
