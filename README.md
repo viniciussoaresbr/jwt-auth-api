@@ -1,17 +1,77 @@
-<h1>Jwt-auth-api</h1>
-<p>API desenvolvida com intuito de implementar a autenticação e autorização do JSON Web Token</p>
-<h2>✅ Features</h2>
-<ul>
-  <li>Cadastro de usuário</li>
-  <li>Password hashing</li>
-  <li>Login através da criação do access token</li>
-  <li>Criação de Posts</li>
-</ul>
-<h2>💻 Tecnologias</h2>
-<ul>
-  <li>Node.js</li>
-  <li>Express.js</li>
-  <li>Typescript</li>
-  <li>Prisma</li>
-  <li><b>Banco de dados :</b> PostgreSQL</li>
-</ul>
+# Jwt-auth-api
+API desenvolvida com intuito de implementar a autenticação e autorização do JSON Web Token
+
+## ✅ Features
+- Cadastro de usuário
+- Password hashing
+- Login através da criação do access token
+- Criação de Posts 
+
+## 💻 Tecnologias 
+- Node.js 
+- Express.js 
+- Typescript 
+- Prisma 
+- **Banco de dados :** PostgreSQL - Hospedado no ElephantSQL
+
+## 🚀 Deploy no Railway
+https://jwt-auth-api-production.up.railway.app/
+
+### Request
+
+`POST /users/`
+
+    curl -X POST https://jwt-auth-api-production.up.railway.app/users -H 'Content-Type: application/json'  
+    
+Body :
+
+            {
+              "name": "Lucas",
+              "lastname": "Silva",
+              "email": "lucassilva@example.com",
+              "password": "1234"
+            }
+            
+`POST /auth/`
+
+    curl -X POST https://jwt-auth-api-production.up.railway.app/auth -H 'Content-Type: application/json'
+    
+Body :
+
+            {
+              "email": "lucassilva@example.com",
+              "password": "1234"
+            }
+            
+`POST /posts/`
+
+    curl -X POST https://jwt-auth-api-production.up.railway.app/posts -H 'Content-Type: application/json'
+    
+- Headers:
+
+  Authorization: Bearer [access_token]
+  
+  Body :
+
+            {
+              "text" : "example"
+            }
+    
+`GET /posts/`
+
+    curl -X GET https://jwt-auth-api-production.up.railway.app/posts -H 'Content-Type: application/json'
+    
+- Headers:
+
+  Authorization: Bearer [access_token]
+    
+`GET /posts/users/{id}`
+
+    curl -X GET https://jwt-auth-api-production.up.railway.app/posts/users/id -H 'Content-Type: application/json'
+    
+- Headers:
+
+  Authorization: Bearer [access_token]
+   
+       
+                
