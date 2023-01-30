@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/prisma";
+import { prisma } from "../database/prisma";
 import { IPost, IUserRequest } from "../interfaces";
 
 const save = async (postBody: IPost, user: IUserRequest) => {

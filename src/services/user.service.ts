@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/prisma";
+import { prisma } from "../database/prisma";
 import { IUser } from "../interfaces";
 import createError from "http-errors";
 import bcrypt from "bcryptjs";
