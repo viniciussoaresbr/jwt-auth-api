@@ -2,9 +2,15 @@ import { prisma } from "../database/prisma";
 import { IUser } from "../interfaces";
 import createError from "http-errors";
 import bcrypt from "bcryptjs";
+import { bodyValidation } from "../utils/bodyValidation";
 
 const save = async (userBody: IUser) => {
-  const { email, password } = userBody;
+  const { name, lastname, email, password } = userBody;
+
+  const requiredKeys = ["name", "lastname", "email", "password"];
+
+  bodyValidation<IUser>(requiredKeys, userBody);
+
   const userExists = await prisma.user.findUnique({
     where: {
       email: email,
@@ -16,10 +22,22 @@ const save = async (userBody: IUser) => {
   const userPassword = bcrypt.hashSync(password, 8);
 
   const user = await prisma.user.create({
-    data: { ...userBody, password: userPassword },
+    data: {
+      name: name,
+      lastname: lastname,
+      email: email,
+      password: userPassword,
+    },
   });
-
   return user;
 };
 
-export const userService = { save };
+const findUserById = async (id: number) => {
+  return await prisma.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+};
+
+export const userService = { save, findUserById };
