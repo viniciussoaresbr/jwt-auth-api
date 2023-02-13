@@ -1,3 +1,4 @@
+import createHttpError from "http-errors";
 import { prisma } from "../database/prisma";
 import { IPost, IUserRequest } from "../interfaces";
 
@@ -31,4 +32,22 @@ const findByUserId = (id: number) => {
   });
 };
 
-export const postService = { save, findAll, findByUserId };
+const deletePostById = async (id: number, user: IUserRequest) => {
+  const userPosts = await findByUserId(user.userId);
+
+  const postExists = userPosts.some(post => post.id === id);
+
+  if (!postExists) {
+    throw new createHttpError.BadRequest("Esse post não existe");
+  }
+
+  const deletedPost = await prisma.post.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  return deletedPost;
+};
+
+export const postService = { save, findAll, findByUserId, deletePostById };
