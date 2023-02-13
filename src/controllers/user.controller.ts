@@ -18,7 +18,13 @@ const save = async (req: Request, res: Response) => {
 const findUserById = async (req: Request, res: Response) => {
   try {
     const data = await userService.findUserById(parseInt(req.params.userId));
-    res.status(200).send(data);
+    const formattedData = {
+      id: data?.id,
+      name: data?.name,
+      lastname: data?.lastname,
+      email: data?.email,
+    };
+    res.status(200).send(formattedData);
   } catch (error) {
     res
       .status(httpErrorsStatus.BadRequestError)
