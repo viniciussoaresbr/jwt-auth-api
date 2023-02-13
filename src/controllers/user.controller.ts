@@ -1,9 +1,8 @@
-import { Response } from "express";
-import { IRequest } from "../interfaces";
+import { Request, Response } from "express";
 import { userService } from "../services/user.service";
 import { httpErrorsStatus } from "../utils/errors.status";
 
-const save = async (req: IRequest, res: Response) => {
+const save = async (req: Request, res: Response) => {
   try {
     await userService.save(req.body);
     res.status(201).send({ message: "Usuário criado com sucesso" });
@@ -16,4 +15,15 @@ const save = async (req: IRequest, res: Response) => {
   }
 };
 
-export const userController = { save };
+const findUserById = async (req: Request, res: Response) => {
+  try {
+    const data = await userService.findUserById(parseInt(req.params.userId));
+    res.status(200).send(data);
+  } catch (error) {
+    res
+      .status(httpErrorsStatus.BadRequestError)
+      .send({ message: "Usuário não encontrado" });
+  }
+};
+
+export const userController = { save, findUserById };
