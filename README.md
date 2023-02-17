@@ -34,7 +34,16 @@ Body :
               "lastname": "Silva",
               "email": "lucassilva@example.com",
               "password": "1234"
-            }
+            }          
+            
+`GET /users/{id}`
+
+    curl -X GET https://jwt-auth-api-production.up.railway.app/users/id -H 'Content-Type: application/json'
+
+- Headers:
+
+  Authorization: Bearer [access_token]
+  
 
 `POST /auth/`
 
@@ -72,6 +81,14 @@ Body :
 `GET /posts/users/{id}`
 
     curl -X GET https://jwt-auth-api-production.up.railway.app/posts/users/id -H 'Content-Type: application/json'
+
+- Headers:
+
+  Authorization: Bearer [access_token]
+  
+  `DELETE /posts/{id}`
+
+      curl -X DELETE https://jwt-auth-api-production.up.railway.app/posts/id -H 'Content-Type: application/json'
 
 - Headers:
 
