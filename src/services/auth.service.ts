@@ -3,7 +3,7 @@ import { IUserLogin } from "../interfaces";
 import createError from "http-errors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { bodyValidation } from "../utils/bodyValidation";
+import { bodyValidation } from "../utils/body.validate";
 
 const auth = async (userLogin: IUserLogin) => {
   const { email, password } = userLogin;

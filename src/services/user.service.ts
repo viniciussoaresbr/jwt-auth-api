@@ -2,7 +2,8 @@ import { prisma } from "../database/prisma";
 import { IUser } from "../interfaces";
 import createError from "http-errors";
 import bcrypt from "bcryptjs";
-import { bodyValidation } from "../utils/bodyValidation";
+import { bodyValidation } from "../utils/body.validate";
+import { emailValidation, passwordValidation } from "../utils/user.validate";
 
 const save = async (userBody: IUser) => {
   const { name, lastname, email, password } = userBody;
@@ -18,6 +19,9 @@ const save = async (userBody: IUser) => {
   });
 
   if (userExists) throw new createError.Conflict("E-mail já foi cadastrado");
+
+  emailValidation(email);
+  passwordValidation(password);
 
   const userPassword = bcrypt.hashSync(password, 8);
 
