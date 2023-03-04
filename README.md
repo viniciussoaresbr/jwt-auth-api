@@ -19,8 +19,6 @@ API desenvolvida com intuito de implementar a autenticação e autorização do 
 
 ## 🚀 Deploy no Railway
 
-https://jwt-auth-api-production.up.railway.app/
-
 ### Request
 
 `POST /users/`
