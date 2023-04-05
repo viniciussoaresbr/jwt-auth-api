@@ -17,9 +17,7 @@ API desenvolvida com intuito de implementar a autenticação e autorização do 
 - Prisma
 - **Banco de dados :** PostgreSQL - Hospedado no ElephantSQL
 
-## 🚀 Deploy no Railway
-
-https://jwt-auth-api-production.up.railway.app/
+## 🚀 Deploy na Railway
 
 ### Request
 
@@ -34,8 +32,8 @@ Body :
               "lastname": "Silva",
               "email": "lucassilva@example.com",
               "password": "1234"
-            }          
-            
+            }
+
 `GET /users/{id}`
 
     curl -X GET https://jwt-auth-api-production.up.railway.app/users/id -H 'Content-Type: application/json'
@@ -43,7 +41,6 @@ Body :
 - Headers:
 
   Authorization: Bearer [access_token]
-  
 
 `POST /auth/`
 
@@ -85,7 +82,7 @@ Body :
 - Headers:
 
   Authorization: Bearer [access_token]
-  
+
   `DELETE /posts/{id}`
 
       curl -X DELETE https://jwt-auth-api-production.up.railway.app/posts/id -H 'Content-Type: application/json'
